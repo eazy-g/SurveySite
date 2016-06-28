@@ -1,0 +1,21 @@
+{
+  "name": "SurveySite",
+  "description": "only the coolest survey site",
+  "main": "index.html",
+  "authors": [
+    "Garrett Brustkern"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/eazy-g/SurveySite.git",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
