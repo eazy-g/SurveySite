@@ -20,15 +20,12 @@ Database.Guests = sequelize.define('guests', {
 
 Database.Answers = sequelize.define('answers', {
   id: {type: Sequelize.INTEGER, unique: true, primaryKey: true, autoIncrement: true},
-  guest_id: Sequelize.INTEGER,
-  question_id: Sequelize.INTEGER,
   user_answer: Sequelize.STRING
 });
 
 Database.Questions = sequelize.define('questions', {
   id: {type: Sequelize.INTEGER, unique: true, primaryKey: true, autoIncrement: true},
-  question_text: Sequelize.STRING(1234),
-  admin_id: Sequelize.INTEGER
+  question_text: Sequelize.STRING(1234)
 });
 
 Database.Admins = sequelize.define('admins', {
@@ -36,6 +33,21 @@ Database.Admins = sequelize.define('admins', {
   username: Sequelize.STRING,
   password: Sequelize.STRING
 });
+
+Database.Answers.belongsTo(Database.Questions);
+Database.Questions.hasMany(Database.Answers);
+
+Database.Answers.belongsTo(Database.Guests);
+Database.Guests.hasMany(Database.Answers);
+
+Database.Questions.belongsTo(Database.Admins);
+Database.Admins.hasMany(Database.Questions);
+
+// sequelize.sync().then(function(){
+//   // return Database.Admins.findAll({ include: [Database.Questions] });
+// }).then(function(results){
+//   console.log('results', JSON.stringify(results));
+// })
 
 // sequelize.sync().then(function () {
 //   // Table created

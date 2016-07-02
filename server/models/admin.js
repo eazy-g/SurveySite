@@ -6,8 +6,12 @@ var decoder = Promise.promisify(bcrypt.compare);
 
 var Admin = module.exports;
 
-Admin.getAllQuestions = function (member_id) {
-  return db.Questions.findAll({where: {admin_id: member_id}});
+Admin.getAllQuestions = function (member_name) {
+  return db.Admins.findOne({where: {username: member_name}, include: [db.Questions] });
+}
+
+Admin.getAnswers = function (member_id) {
+  return db.Answers.findAll({where: {}})
 }
 
 Admin.login = function (credentials) {
@@ -38,10 +42,10 @@ Admin.signup = function (credentials) {
       } else {
         return cipher(credentials.password, null, null).bind(this)
                  .then(function (hash) {
-                  return db.Admins.create({
-                    username: credentials.username,
-                    password: hash
-                  });
+                   return db.Admins.create({
+                     username: credentials.username,
+                     password: hash
+                 });
                });
       }
     }).catch(function(err){
@@ -53,18 +57,16 @@ Admin.signup = function (credentials) {
 Admin.createQuestion = function (details) {
   return db.Questions.create({
     question_text: details.question_text,
-    admin_id: details.admin_id
+    adminId: details.adminId
+  }).catch(function (err) {
+    console.error('error creating question', err);
   });
 }
 
 
 //helper function
 Admin.findUser = function (user) {
-  return db.sequelize.sync().then(function () {
-    return db.Admins.findOne({
-      where: {username: user}
-    });
-  }).catch(function(err){
-    console.error('error connecting to db', err);
+  return db.Admins.findOne({
+    where: {username: user}
   });
 }
