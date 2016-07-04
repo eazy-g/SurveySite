@@ -6,10 +6,9 @@ var router = express.Router();
 module.exports = router;
 
 router.get('*', function (req, res) {
-  console.log('req query', req.query);
-  Questions.findOne()
-    .then(function(question){
-      res.status(200).send(question);
+  Questions.getUnanswered(req.query.guest)
+    .then(function(questions){
+      res.status(200).send(questions);
     });
 });
 

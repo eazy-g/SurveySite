@@ -15,7 +15,7 @@ Database.sequelize = sequelize;
 
 Database.Guests = sequelize.define('guests', {
   id: {type: Sequelize.INTEGER, unique: true, primaryKey: true, autoIncrement: true},
-  indentity: Sequelize.STRING
+  identity: Sequelize.STRING
 });
 
 Database.Answers = sequelize.define('answers', {
