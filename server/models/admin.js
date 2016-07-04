@@ -7,12 +7,15 @@ var decoder = Promise.promisify(bcrypt.compare);
 var Admin = module.exports;
 
 Admin.getAllQuestions = function (member_name) {
-  return db.Admins.findOne({where: {username: member_name}, include: [db.Questions] });
+  return db.Admins.findOne({
+           where: {username: member_name},
+           include: [{
+             model: db.Questions,
+             include: [db.Answers]
+           }]
+         });
 }
 
-Admin.getAnswers = function (member_id) {
-  return db.Answers.findAll({where: {}})
-}
 
 Admin.login = function (credentials) {
   return Admin.findUser(credentials.username)

@@ -7,14 +7,9 @@ module.exports = router;
 
 //get all of the admins questions and data
 router.get('/questions', function (req, res) {
-  console.log('req query', req.query);
   Admin.getAllQuestions(req.query.member)
-    .then(function (questions){
-      console.log('questions', JSON.stringify(questions));
-      // Admin.getAnswers(req.query.member)
-      //   .then(function (answers) {
-
-      //   })
+    .then(function(questions){
+      res.status(200).send(questions);
     });
 });
 
