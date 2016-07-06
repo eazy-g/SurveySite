@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>SurveySite</title>
+
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='client/main.css' />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Welcome to the Survey Site!</h1>
+        <p>Click below to get started answering questions, or visit the admin portal to sign in/sign up
+          and create/manage questions for others to answer!</p>
+        <p>
+          <a class="btn btn-primary btn-lg" href="#" role="button">Answer Q's</a>
+          <button type="button" class="btn btn-info pull-right btn-lg">Sign Up</button>
+          <a><button type="button" class="btn btn-default btn-lg pull-right admin">Sign In</button></a>
+          <span class="pull-right admin">Admin:</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text-center radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+              Option one is this and that&mdash;be sure to include why it's great
+            </label>
+          </div>
+          <div class="radio text-center">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+              Option two can be something else and selecting it will deselect option one
+            </label>
+          </div>
+          <div class="radio text-center">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+              Option three is disabled
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--<script src="client/app.js"></script> -->
+  </body>
+</html>

@@ -13,6 +13,9 @@ Admin.getAllQuestions = function (member_name) {
              model: db.Questions,
              include: [db.Answers]
            }]
+         }).then(function getStats (user) {
+           var copy = user.questions.slice();
+
          });
 }
 

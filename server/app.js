@@ -21,7 +21,7 @@ routes.use('/questions', questionsRouter);
 routes.use('/admin', adminRouter);
 
 routes.get('/', function (req, res) {
-  res.sendFile(Path.resolve(assetFolder, 'client/index.html'));
+  res.sendFile(Path.resolve(assetFolder, 'client/main.html'));
 });
 
 if (process.env.NODE_ENV !== 'test') {
