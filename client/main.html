@@ -26,7 +26,7 @@
         <p>Click below to get started answering questions, or visit the admin portal to sign in/sign up
           and create/manage questions for others to answer!</p>
         <p>
-          <a class="btn btn-primary btn-lg" href="#" role="button">Answer Q's</a>
+          <a class="btn btn-primary btn-lg" href="#" role="button" id="answer-qs">Answer Q's</a>
           <button type="button" class="btn btn-info pull-right btn-lg">Sign Up</button>
           <a><button type="button" class="btn btn-default btn-lg pull-right admin">Sign In</button></a>
           <span class="pull-right admin">Admin:</span>
@@ -34,33 +34,29 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="text-center radio">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-              Option one is this and that&mdash;be sure to include why it's great
-            </label>
-          </div>
-          <div class="radio text-center">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-              Option two can be something else and selecting it will deselect option one
-            </label>
-          </div>
-          <div class="radio text-center">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
-              Option three is disabled
-            </label>
-          </div>
-        </div>
+  <div class="container"  id="question-box">
+    <div class="panel panel-default">
+
+      <div class="panel-heading" >Your Answer: </div>
+
+      <div class="panel-body">
+      <p id="question-body"></p>
       </div>
+
+      <div class="list-group" id="answer-list">
+        <button type="button" class="list-group-item" id="answer">Cras justo odio</button>
+      </div>
+
     </div>
+  </div>
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <!--<script src="client/app.js"></script> -->
+    <script src="client/js/ServerAPI.js"></script>
+    <script src="client/js/QuestionPage.js"></script>
+    <script src="client/js/app.js"></script>
+
+    <!-- script which grabs the user's ip address and sets it to the variable 'user' -->
+    <script type="text/javascript" src="https://www.l2.io/ip.js?var=user"></script>
   </body>
 </html>

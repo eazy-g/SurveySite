@@ -1,3 +1,7 @@
+//This will hold the user's ip. In the case they decide to answer questions,
+//it will be used to identify them
+var user;
+
 var App = (function App(){
   var publicAPI;
   var identity;
@@ -15,7 +19,15 @@ var App = (function App(){
 
   function init() {
     $homePage = $(".jumbotron");
-    $questionBox = $("#questionBox");
+    $getQuestionsButton = $("#answer-qs");
 
-    //TODO
+    $getQuestionsButton.click(function(e) {
+      $homePage.hide();
+      QuestionPage.getQuestion();
+    });
+
+
   }
+})();
+
+$(document).ready(App.init);

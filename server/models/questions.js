@@ -15,7 +15,7 @@ Questions.getUnanswered = function (ip) {
                    }
                  }]
                }).then(function (questions){
-                 var alreadyAnswered = [];
+                 var alreadyAnswered = [0];
                  questions.forEach(function(question){
                    alreadyAnswered.push(question.id);
                  });
