@@ -4,7 +4,7 @@ var ServerAPI = (function ServerAPI(){
   publicAPI = {
     login: login,
     getQuestion: getQuestion,
-    ignoreReminder: ignoreReminder,
+    submitAnswer: submitAnswer,
     deleteReminder: deleteReminder,
     addReminder: addReminder,
     updateReminder: updateReminder,
@@ -39,8 +39,8 @@ var ServerAPI = (function ServerAPI(){
     return callAPI("questions?guest=" + identity, "GET", {}, "json", cb);
   }
 
-  function ignoreReminder(data,cb) {
-    return callAPI("reminder/ignore","POST",data,"text",cb);
+  function submitAnswer(data,cb) {
+    return callAPI("questions/answer","POST",data,"text",cb);
   }
 
   function deleteReminder(data,cb) {

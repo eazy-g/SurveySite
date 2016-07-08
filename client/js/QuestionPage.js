@@ -32,6 +32,10 @@ var QuestionPage = (function QuestionPage() {
       $submitButton.prop('disabled', false);
     });
 
+    $submitButton.click(function(element) {
+      answerQuestion($selectedAnswer.text().slice(-1));
+    });
+
     ServerAPI.getQuestion(user, function questionRetrieved(err, unanswered) {
       if(err) {
         console.error('error retrieving question', err);
@@ -44,19 +48,49 @@ var QuestionPage = (function QuestionPage() {
           questions = unanswered;
         }
         console.log('questions', questions);
-        if(questions.length) {
-          currentQuestion = questions.shift();
-          questionText = currentQuestion.question_text.split('^');
-          $questionBody.text(questionText[0]);
-
-          for (var i = 1; i < questionText.length; i++) {
-            $answerList.append($answerTemplate.clone().text(questionText[i]));
-          }
-
-        }
+        buildQuestion();
 
       } //end else success block
+    }); //ServerAPI.getQuesiton
+  } //function getQuestion
+
+
+  function answerQuestion(answer) {
+    var data = {
+      identity: user,
+      questionId: currentQuestion.id,
+      user_answer: answer.toLowerCase()
+    };
+
+    ServerAPI.submitAnswer(data, function answerSubmitted(err, success) {
+      if(err) {
+        console.error('error answering question', err);
+      } else {
+        buildQuestion();
+      }
     });
+
+  }
+
+
+  function buildQuestion () {
+    $submitButton.prop('disabled', true);
+    $selectedAnswer.text('Your Answer: ');
+    $answerList.empty();
+
+    if(questions.length) {
+      currentQuestion = questions.shift();
+      questionText = currentQuestion.question_text.split('^');
+      $questionBody.text(questionText[0]);
+
+      for (var i = 1; i < questionText.length; i++) {
+        $answerList.append($answerTemplate.clone().text(questionText[i]));
+      }
+    } else {
+      //there are no questions left
+      $questionBody.text('You\'ve answered every question in the system! Please come back later');
+    }
+
   }
 
 })();

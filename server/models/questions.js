@@ -37,11 +37,15 @@ Questions.getUnanswered = function (ip) {
 
 Questions.answer = function (details) {
   //post to answers table w/ guest_id, question_id, and answer
-  return db.Answers.create({
-    guestId: details.guestId,
-    questionId: details.questionId,
-    user_answer: details.user_answer
-  }).catch(function (err) {
-    console.error('error answering question', err);
-  })
+  return db.Guests.findOne({where: {identity: details.identity}})
+    .then(function (guest) {
+      return db.Answers.create({
+        guestId: guest.id,
+        questionId: details.questionId,
+        user_answer: details.user_answer
+      });
+    }).catch(function (err) {
+        console.error('error answering question', err);
+    })
+
 }

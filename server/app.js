@@ -12,10 +12,6 @@ var routes = express.Router();
 var assetFolder = Path.resolve(__dirname, '..');
 routes.use(express.static(assetFolder));
 
-// Logging and parsing
-routes.use(morgan('dev'));
-routes.use(parser.json());
-
 // Set up our routes
 routes.use('/questions', questionsRouter);
 routes.use('/admin', adminRouter);
@@ -32,8 +28,14 @@ if (process.env.NODE_ENV !== 'test') {
   var port = process.env.PORT || 4400;
 
   // Mount our main router
-  app.use('/', routes);
+  app.use(parser.json());
+  app.use(parser.urlencoded({
+    extended: true
+  }));
+  // Logging and parsing
+  app.use(morgan('dev'));
 
+  app.use('/', routes);
   app.listen(port);
   console.log("Listening on port", port);
 
