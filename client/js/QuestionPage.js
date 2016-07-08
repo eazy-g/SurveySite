@@ -5,11 +5,11 @@ var QuestionPage = (function QuestionPage() {
   var $answer;
   var $answerTemplate;
   var $answerList;
-  var $questionHeading;
+  var $selectedAnswer;
+  var $submitButton;
   var questions;
   var currentQuestion;
   var questionText;
-  var selectedAnswer = '';
 
   publicAPI = {
     getQuestion: getQuestion
@@ -22,20 +22,28 @@ var QuestionPage = (function QuestionPage() {
     $questionBody = $('#question-body');
     $answer = $('#answer');
     $answerList = $('#answer-list');
-    $questionHeading = $('.panel-heading');
+    $selectedAnswer = $('#selected-answer');
+    $submitButton = $('button');
     $answerTemplate = $answer.clone();
     $answer.remove();
-    $questionHeading.append(selectedAnswer);
 
     $answerList.click(function(element) {
-      selectedAnswer = element.toElement.textContent;
+      $selectedAnswer.text('Your Answer: ' + element.toElement.textContent.charAt(0).toUpperCase());
+      $submitButton.prop('disabled', false);
     });
 
     ServerAPI.getQuestion(user, function questionRetrieved(err, unanswered) {
       if(err) {
         console.error('error retrieving question', err);
       } else {
-        questions = unanswered;
+        if(unanswered.hasOwnProperty('question_text')){
+          //case where 'unanswered' is just a single question object
+          questions = [unanswered];
+        } else {
+          //case where we get multiple questions in an array
+          questions = unanswered;
+        }
+        console.log('questions', questions);
         if(questions.length) {
           currentQuestion = questions.shift();
           questionText = currentQuestion.question_text.split('^');

@@ -26,9 +26,9 @@
         <p>Click below to get started answering questions, or visit the admin portal to sign in/sign up
           and create/manage questions for others to answer!</p>
         <p>
-          <a class="btn btn-primary btn-lg" href="#" role="button" id="answer-qs">Answer Q's</a>
+          <button type="button" class="btn btn-primary btn-lg" id="answer-qs">Answer Q's</button>
           <button type="button" class="btn btn-info pull-right btn-lg">Sign Up</button>
-          <a><button type="button" class="btn btn-default btn-lg pull-right admin">Sign In</button></a>
+          <button type="button" class="btn btn-default btn-lg pull-right admin">Sign In</button>
           <span class="pull-right admin">Admin:</span>
         </p>
       </div>
@@ -37,10 +37,13 @@
   <div class="container"  id="question-box">
     <div class="panel panel-default">
 
-      <div class="panel-heading" >Your Answer: </div>
+      <div class="panel-heading" >
+        <span id="selected-answer">Your Answer: </span>
+        <button type="button" class="btn btn-primary btn-sm" disabled="disabled">Submit</button>
+      </div>
 
       <div class="panel-body">
-      <p id="question-body"></p>
+        <p id="question-body"></p>
       </div>
 
       <div class="list-group" id="answer-list">
