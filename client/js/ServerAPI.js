@@ -5,7 +5,7 @@ var ServerAPI = (function ServerAPI(){
     login: login,
     getQuestion: getQuestion,
     submitAnswer: submitAnswer,
-    deleteReminder: deleteReminder,
+    adminQuestions: adminQuestions,
     addReminder: addReminder,
     updateReminder: updateReminder,
     setReminderInvitees: setReminderInvitees,
@@ -32,7 +32,7 @@ var ServerAPI = (function ServerAPI(){
   }
 
   function login(data,cb) {
-    return callAPI("login","POST",data,"text",cb);
+    return callAPI("admin/login","POST",data,"text",cb);
   }
 
   function getQuestion(identity,cb) {
@@ -43,8 +43,8 @@ var ServerAPI = (function ServerAPI(){
     return callAPI("questions/answer","POST",data,"text",cb);
   }
 
-  function deleteReminder(data,cb) {
-    return callAPI("reminder/delete","POST",data,"text",cb);
+  function adminQuestions(data,cb) {
+    return callAPI("admin/questions?member=" + data.username,"GET",{},"text",cb);
   }
 
   function addReminder(data,cb) {

@@ -28,35 +28,64 @@
         <p>
           <button type="button" class="btn btn-primary btn-lg" id="answer-qs">Answer Q's</button>
           <button type="button" class="btn btn-info pull-right btn-lg">Sign Up</button>
-          <button type="button" class="btn btn-default btn-lg pull-right admin">Sign In</button>
+          <button type="button" class="btn btn-default btn-lg pull-right admin" data-toggle="modal" data-target="#myModal-signin">Sign In</button>
           <span class="pull-right admin">Admin:</span>
         </p>
       </div>
     </div>
 
-  <div class="container"  id="question-box">
-    <div class="panel panel-default">
+    <div class="container"  id="question-box">
+      <div class="panel panel-default">
 
-      <div class="panel-heading" >
-        <span id="selected-answer">Your Answer: </span>
-        <button type="button" class="btn btn-primary btn-sm" disabled="disabled" id="submit-answer">Submit</button>
+        <div class="panel-heading" >
+          <span id="selected-answer">Your Answer: </span>
+          <button type="button" class="btn btn-primary btn-sm" disabled="disabled" id="submit-answer">Submit</button>
+        </div>
+
+        <div class="panel-body">
+          <p id="question-body"></p>
+        </div>
+
+        <div class="list-group" id="answer-list">
+          <button type="button" class="list-group-item" id="answer">Cras justo odio</button>
+        </div>
+
       </div>
-
-      <div class="panel-body">
-        <p id="question-body"></p>
-      </div>
-
-      <div class="list-group" id="answer-list">
-        <button type="button" class="list-group-item" id="answer">Cras justo odio</button>
-      </div>
-
     </div>
-  </div>
+
+
+    <div class="modal fade" id="myModal-signin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Sign In</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="sign-in-username">Username</label>
+              <input type="text" class="form-control" id="sign-in-username" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label for="sign-in-password">Password</label>
+              <input type="password" class="form-control" id="sign-in-password" placeholder="Password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="sign-in">Submit
+              <img class="spinner" src="client/images/spinner.gif">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="client/js/ServerAPI.js"></script>
     <script src="client/js/QuestionPage.js"></script>
+    <script src="client/js/Admin.js"></script>
     <script src="client/js/app.js"></script>
 
     <!-- script which grabs the user's ip address and sets it to the variable 'user' -->

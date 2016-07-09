@@ -23,7 +23,7 @@ var QuestionPage = (function QuestionPage() {
     $answer = $('#answer');
     $answerList = $('#answer-list');
     $selectedAnswer = $('#selected-answer');
-    $submitButton = $('button');
+    $submitButton = $('#submit-answer');
     $answerTemplate = $answer.clone();
     $answer.remove();
 

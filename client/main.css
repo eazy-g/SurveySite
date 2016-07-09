@@ -10,3 +10,7 @@
 #submit-answer {
   margin-left: 40px;
 }
+
+.spinner {
+  display: none;
+}
