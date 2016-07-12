@@ -25,7 +25,6 @@ var Admin = (function Admin() {
       if(err) {
         console.error('error logging in', err);
       } else {
-        console.log('dis status', status);
         buildProfilePage();
       }
     });
