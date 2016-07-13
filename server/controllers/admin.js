@@ -65,3 +65,11 @@ router.post('/createQuestion', function (req, res) {
       res.status(201).send(status);
     });
 });
+
+router.post('/deleteQuestion', function (req, res) {
+  Admin.deleteQuestion(req.body.id)
+    .then(function (status) {
+      console.log('status', status);
+      res.sendStatus(201);
+    });
+});

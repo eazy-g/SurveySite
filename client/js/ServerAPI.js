@@ -6,7 +6,7 @@ var ServerAPI = (function ServerAPI(){
     getQuestion: getQuestion,
     submitAnswer: submitAnswer,
     adminQuestions: adminQuestions,
-    addReminder: addReminder,
+    deleteQuestion: deleteQuestion,
     updateReminder: updateReminder,
     setReminderInvitees: setReminderInvitees,
   };
@@ -47,8 +47,8 @@ var ServerAPI = (function ServerAPI(){
     return callAPI("admin/questions?member=" + data.username,"GET",{},"json",cb);
   }
 
-  function addReminder(data,cb) {
-    return callAPI("reminder/add","POST",data,"text",cb);
+  function deleteQuestion(data,cb) {
+    return callAPI("admin/deleteQuestion","POST",data,"text",cb);
   }
 
   function updateReminder(data,cb) {

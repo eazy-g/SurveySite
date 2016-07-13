@@ -41,7 +41,6 @@ Admin.login = function (credentials) {
 Admin.signup = function (credentials) {
   return Admin.findUser(credentials.username)
     .then(function (user) {
-      console.log('made it', user);
       if(user){
         return {error: 'User already exists'}
       } else {
@@ -54,7 +53,7 @@ Admin.signup = function (credentials) {
                });
       }
     }).catch(function(err){
-      console.log('err on creation', err);
+      console.error('err on creation', err);
     });
 }
 
@@ -68,6 +67,13 @@ Admin.createQuestion = function (details) {
   });
 }
 
+Admin.deleteQuestion = function (questionID) {
+  return db.Questions.destroy({
+    where: {
+      id: questionID
+    }
+  });
+}
 
 //helper function
 Admin.findUser = function (user) {
