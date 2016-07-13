@@ -44,7 +44,7 @@ var ServerAPI = (function ServerAPI(){
   }
 
   function adminQuestions(data,cb) {
-    return callAPI("admin/questions?member=" + data.username,"GET",{},"text",cb);
+    return callAPI("admin/questions?member=" + data.username,"GET",{},"json",cb);
   }
 
   function addReminder(data,cb) {

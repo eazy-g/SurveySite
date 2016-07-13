@@ -47,7 +47,7 @@ var QuestionPage = (function QuestionPage() {
           //case where we get multiple questions in an array
           questions = unanswered;
         }
-        console.log('questions', questions);
+
         buildQuestion();
 
       } //end else success block

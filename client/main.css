@@ -14,3 +14,7 @@
 .spinner {
   display: none;
 }
+
+#admin-question-box {
+  display: none;
+}
