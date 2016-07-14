@@ -51,7 +51,7 @@ var ServerAPI = (function ServerAPI(){
   }
 
   function createQuestion(data,cb) {
-    return callAPI("admin/createQuestion","POST",data,"text",cb);
+    return callAPI("admin/createQuestion","POST",data,"json",cb);
   }
 
 })();

@@ -10,6 +10,7 @@ var Admin = (function Admin() {
   var $answer;
   var $answerTemplate;
   var $createButton;
+  var $originalCreateQmodal;
   var questionAndAnswers;
   var currentAnswer;
   var answerLetter;
@@ -45,6 +46,7 @@ var Admin = (function Admin() {
   function buildProfilePage () {
     $questionBox = $('#admin-question-box');
     $createButton = $('#create-button');
+    $originalCreateQmodal = $('#myModal-create').clone();
     $createButton.show();
     $createButton.find('button').click(createQuestion);
 
@@ -128,6 +130,7 @@ var Admin = (function Admin() {
 
   function submitQuestion () {
     var letter = 'a';
+    var $createQmodal = $('#myModal-create');
     var $questionText = $('#question-text').val();
     $('*[id*=answer-option]:visible').each(function() {
       $questionText += ' ^' + letter + ') ' + $( this ).val();
@@ -140,7 +143,19 @@ var Admin = (function Admin() {
         if (err) {
           console.error('error submitting question', err);
         } else {
+          //Making the new question have all the properties necessary to buildQuestion
+          success.answers = [];
+          success.percentages = {};
+          success.totalAnswers = 0;
+          success.votesPerAnswer = {};
+          $('body').append(buildQuestion(success));
+          $createQmodal.modal('hide');
 
+          //had to setTimeout because modal was being removed before the modal's 'hide' animation was finished. Removing the modal with all of the user's input and then adding back in a clone of the original seemed easier than backtracking through all the changes to the modal.
+          setTimeout(function(){
+            $createQmodal.remove();
+            $('body').append($originalCreateQmodal.clone());
+          }, 1000);
         }
       });
   }
