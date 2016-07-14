@@ -3,18 +3,16 @@
   margin-right: 10px;
 }
 
-#question-box {
-  display: none;
-}
-
 #submit-answer {
   margin-left: 40px;
 }
 
-.spinner {
+#admin-question-box, .spinner, #question-box {
   display: none;
 }
 
-#admin-question-box {
+#create-button {
   display: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

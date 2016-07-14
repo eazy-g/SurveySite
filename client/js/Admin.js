@@ -8,6 +8,7 @@ var Admin = (function Admin() {
   var $questionBoxTemplate;
   var $answer;
   var $answerTemplate;
+  var $createButton;
   var questionAndAnswers;
   var currentAnswer;
   var answerLetter;
@@ -41,6 +42,9 @@ var Admin = (function Admin() {
 
   function buildProfilePage () {
     $questionBox = $('#admin-question-box');
+    $createButton = $('#create-button');
+    $createButton.show();
+    $createButton.find('button').click(createQuestion);
 
     App.clearHomePage();
     ServerAPI.adminQuestions({username: $username}, function adminInfo (err, questions) {
@@ -96,6 +100,11 @@ var Admin = (function Admin() {
         }
       });
     }
+  }
+
+  function createQuestion () {
+    var $addOption = $('add-answer-choice');
+    $addOption.click()
   }
 
 })();
