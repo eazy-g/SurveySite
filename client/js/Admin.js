@@ -1,6 +1,7 @@
 var Admin = (function Admin() {
   var publicAPI;
   var data;
+  var userID;
   var $username;
   var $password;
   var $percentage;
@@ -34,6 +35,7 @@ var Admin = (function Admin() {
       if(err) {
         console.error('error logging in', err);
       } else {
+        userID = status.user;
         buildProfilePage();
       }
     });
@@ -103,8 +105,44 @@ var Admin = (function Admin() {
   }
 
   function createQuestion () {
-    var $addOption = $('add-answer-choice');
-    $addOption.click()
+    var $answersForm = $('#answer-form');
+    var $addOption = $('#add-choice');
+    var $answerFormDiv = $('#created-answers');
+    var $submitQuestion = $('#submit-question');
+    var $optionTemplate = $answersForm.clone();
+    var option;
+    var letter = 'a';
+    $addOption.click(function(){
+      option = $optionTemplate.clone();
+      letter = nextChar(letter);
+      option.find('#answer-label').text(letter + ')');
+      $answerFormDiv.append(option);
+    });
+
+    $submitQuestion.click(submitQuestion);
+  }
+
+  function nextChar(letter) {
+    return String.fromCharCode(letter.charCodeAt(0) + 1);
+  }
+
+  function submitQuestion () {
+    var letter = 'a';
+    var $questionText = $('#question-text').val();
+    $('*[id*=answer-option]:visible').each(function() {
+      $questionText += ' ^' + letter + ') ' + $( this ).val();
+      letter = nextChar(letter);
+    });
+    ServerAPI.createQuestion({
+      question_text: $questionText,
+      adminId: userID
+      }, function answerSubmitted (err, success) {
+        if (err) {
+          console.error('error submitting question', err);
+        } else {
+
+        }
+      });
   }
 
 })();

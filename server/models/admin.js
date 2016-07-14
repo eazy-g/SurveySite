@@ -26,7 +26,7 @@ Admin.login = function (credentials) {
         return decoder(credentials.password, user.password).bind(this)
           .then(function(match){
             if(match){
-              return {success: true};
+              return {user: user.id};
             } else {
               return {success: false};
             }
