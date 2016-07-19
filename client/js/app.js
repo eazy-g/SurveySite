@@ -8,6 +8,8 @@ var App = (function App(){
   var $questionBox;
   var $getQuestionsButton;
   var $signInButton;
+  var $createButton;
+  var $homeButton;
   var $spinner;
   var $signinModal;
   var $signupModal;
@@ -15,6 +17,7 @@ var App = (function App(){
   publicAPI = {
     init: init,
     clearHomePage: clearHomePage,
+    showHomePage: showHomePage,
     homePage: null,
 
     identity: null
@@ -28,7 +31,9 @@ var App = (function App(){
     $getQuestionsButton = $("#answer-qs");
     $signInButton = $('#sign-in');
     $signUpButton = $('#sign-up');
-    $spinner = $('.spinner');
+    $createButton = $('#create-button');
+    $homeButton = $('#just-home-button');
+    $questionBox = $('#question-box');
     $signinModal = $('#myModal-signin');
     $signupModal = $('#myModal-signup');
 
@@ -50,6 +55,18 @@ var App = (function App(){
     publicAPI.homePage.hide();
     $signinModal.modal('hide');
     $signupModal.modal('hide');
+  }
+
+  function showHomePage() {
+    publicAPI.homePage.show();
+    $createButton.hide();
+    $questionBox.hide();
+    $homeButton.hide();
+    $('*').filter(function() {
+      if($(this).data('question-id') !== undefined){
+        $(this).remove();
+      }
+    });
   }
 
 })();

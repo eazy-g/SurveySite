@@ -7,6 +7,7 @@ var QuestionPage = (function QuestionPage() {
   var $answerList;
   var $selectedAnswer;
   var $submitButton;
+  var $homeButton;
   var questions;
   var currentQuestion;
   var questionText;
@@ -18,14 +19,20 @@ var QuestionPage = (function QuestionPage() {
   return publicAPI;
 
   function getQuestion () {
-    $questionAnswers = $("#question-box").show();
+    $homeButtonBox = $('#just-home-button');
+    $homeButton = $('#just-the-home-button');
     $questionBody = $('#question-body');
     $answer = $('#answer');
     $answerList = $('#answer-list');
     $selectedAnswer = $('#selected-answer');
     $submitButton = $('#submit-answer');
+
+    $homeButtonBox.show();
+    $questionAnswers = $("#question-box").show();
     $answerTemplate = $answer.clone();
     $answer.remove();
+
+    $homeButton.click(App.showHomePage);
 
     $answerList.click(function(element) {
       $selectedAnswer.text('Your Answer: ' + element.toElement.textContent.charAt(0).toUpperCase());

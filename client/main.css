@@ -11,7 +11,7 @@
   display: none;
 }
 
-#create-button {
+#create-button, #just-home-button {
   display: none;
   margin-top: 20px;
   margin-bottom: 20px;

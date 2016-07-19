@@ -83,15 +83,7 @@ var Admin = (function Admin() {
 
     App.clearHomePage();
 
-    $homeButton.click(function () {
-      App.homePage.show();
-      $createButton.hide();
-      $('*').filter(function() {
-        if($(this).data('question-id') !== undefined){
-          $(this).remove();
-        }
-      });
-    });
+    $homeButton.click(App.showHomePage);
 
     ServerAPI.adminQuestions({username: $username}, function adminInfo (err, questions) {
       if(err) {
