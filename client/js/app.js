@@ -27,6 +27,7 @@ var App = (function App(){
     $homePage = $(".jumbotron");
     $getQuestionsButton = $("#answer-qs");
     $signInButton = $('#sign-in');
+    $signUpButton = $('#sign-up');
     $spinner = $('.spinner');
     $signinModal = $('#myModal-signin');
     $signupModal = $('#myModal-signup');
@@ -40,6 +41,10 @@ var App = (function App(){
       // $signInButton.text('');
       // $signInButton.append($spinner.show());
       Admin.signIn();
+    });
+
+    $signUpButton.click(function(e) {
+      Admin.signUp();
     });
   }
 

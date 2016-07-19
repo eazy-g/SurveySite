@@ -17,7 +17,8 @@ var Admin = (function Admin() {
   var answerClone;
 
   publicAPI = {
-    signIn: signIn
+    signIn: signIn,
+    signUp: signUp
   };
 
   return publicAPI;
@@ -42,6 +43,34 @@ var Admin = (function Admin() {
     });
 
   } //function signIn
+
+  function signUp () {
+
+    $username = $('#sign-up-username').val();
+    $password = $('#sign-up-password').val();
+    $errorMessage = $('#username-warning-message');
+
+    data = {
+      username: $username,
+      password: $password
+    };
+
+    ServerAPI.signup(data, function loginStatus(err, status) {
+      if(err) {
+        console.error('error logging in', err);
+      } else {
+        if(status.userTaken) {
+          //user already exists, display error message
+          $errorMessage.show();
+        } else {
+          //user signup successful
+          userID = status.user;
+          buildProfilePage();
+        }
+      }
+    });
+
+  }
 
   function buildProfilePage () {
     $questionBox = $('#admin-question-box');

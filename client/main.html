@@ -27,7 +27,7 @@
           and create/manage questions for others to answer!</p>
         <p>
           <button type="button" class="btn btn-primary btn-lg" id="answer-qs">Answer Q's</button>
-          <button type="button" class="btn btn-info pull-right btn-lg">Sign Up</button>
+          <button type="button" class="btn btn-info pull-right btn-lg" data-toggle="modal" data-target="#myModal-signup">Sign Up</button>
           <button type="button" class="btn btn-default btn-lg pull-right admin" data-toggle="modal" data-target="#myModal-signin">Sign In</button>
           <span class="pull-right admin">Admin:</span>
         </p>
@@ -54,6 +54,7 @@
     </div>
 
     <div class="container" id="create-button">
+      <button type="button" class="btn btn-primary btn-lg pull-left" data-toggle="modal" data-target="#myModal-create">Home</button>
       <button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#myModal-create">Create</button>
     </div>
 
@@ -107,6 +108,34 @@
       </div>
     </div>
 
+    <div class="modal fade" id="myModal-signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="sign-up-username">Username</label>
+              <input type="text" class="form-control" id="sign-up-username" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label for="sign-up-password">Password</label>
+              <input type="password" class="form-control" id="sign-up-password" placeholder="Password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <span id="username-warning-message" class="text-warning pull-left">Username already exists!</span>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="sign-up">Submit
+              <img class="spinner" src="client/images/spinner.gif">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="myModal-create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -123,7 +152,7 @@
             </div>
             <div class="form-group" id="created-answers">
               <label for="answer-option">Answer Options:</label>
-              <form class="form-inline" id="answer-form" style="display: block;">
+              <form class="form-inline" id="answer-form" style="display: block;" onsubmit="return false;">
                 <div class="form-group" id="option-div">
                   <label for="answer-option" id="answer-label">a)</label>
                   <input type="text" class="form-control" id="answer-option">

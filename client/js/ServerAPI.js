@@ -7,7 +7,8 @@ var ServerAPI = (function ServerAPI(){
     submitAnswer: submitAnswer,
     adminQuestions: adminQuestions,
     deleteQuestion: deleteQuestion,
-    createQuestion: createQuestion
+    createQuestion: createQuestion,
+    signup: signup
   };
 
   return publicAPI;
@@ -32,6 +33,10 @@ var ServerAPI = (function ServerAPI(){
 
   function login(data,cb) {
     return callAPI("admin/login","POST",data,"json",cb);
+  }
+
+  function signup(data,cb) {
+    return callAPI("admin/signup","POST",data,"json",cb);
   }
 
   function getQuestion(identity,cb) {

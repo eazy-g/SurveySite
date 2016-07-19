@@ -42,13 +42,16 @@ Admin.signup = function (credentials) {
   return Admin.findUser(credentials.username)
     .then(function (user) {
       if(user){
-        return {error: 'User already exists'}
+        return {userTaken: 'User already exists'}
       } else {
         return cipher(credentials.password, null, null).bind(this)
                  .then(function (hash) {
                    return db.Admins.create({
                      username: credentials.username,
                      password: hash
+                 }).then(function newUser (newnew) {
+                   //so that the hashed password and other sensitive information is not sent back to client
+                   return {user: newnew.username};
                  });
                });
       }
