@@ -5,7 +5,6 @@ var user;
 var App = (function App(){
   var publicAPI;
   var identity;
-  var $homePage;
   var $questionBox;
   var $getQuestionsButton;
   var $signInButton;
@@ -16,6 +15,7 @@ var App = (function App(){
   publicAPI = {
     init: init,
     clearHomePage: clearHomePage,
+    homePage: null,
 
     identity: null
   };
@@ -24,7 +24,7 @@ var App = (function App(){
 
 
   function init() {
-    $homePage = $(".jumbotron");
+    publicAPI.homePage = $(".jumbotron");
     $getQuestionsButton = $("#answer-qs");
     $signInButton = $('#sign-in');
     $signUpButton = $('#sign-up');
@@ -38,8 +38,6 @@ var App = (function App(){
     });
 
     $signInButton.click(function(e) {
-      // $signInButton.text('');
-      // $signInButton.append($spinner.show());
       Admin.signIn();
     });
 
@@ -49,7 +47,7 @@ var App = (function App(){
   }
 
   function clearHomePage () {
-    $homePage.hide();
+    publicAPI.homePage.hide();
     $signinModal.modal('hide');
     $signupModal.modal('hide');
   }

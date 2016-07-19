@@ -75,11 +75,24 @@ var Admin = (function Admin() {
   function buildProfilePage () {
     $questionBox = $('#admin-question-box');
     $createButton = $('#create-button');
+    $homeButton = $('#home-button');
+
     $originalCreateQmodal = $('#myModal-create').clone();
     $createButton.show();
     $createButton.find('button').click(createQuestion);
 
     App.clearHomePage();
+
+    $homeButton.click(function () {
+      App.homePage.show();
+      $createButton.hide();
+      $('*').filter(function() {
+        if($(this).data('question-id') !== undefined){
+          $(this).remove();
+        }
+      });
+    });
+
     ServerAPI.adminQuestions({username: $username}, function adminInfo (err, questions) {
       if(err) {
         console.error('error logging in', err);
@@ -103,6 +116,8 @@ var Admin = (function Admin() {
     $questionBoxTemplate.find('#total-votes').text('Total Votes: ' + question.totalAnswers);
 
     $questionBoxTemplate.find('#delete-answer').click(function(evt){deleteQuestion(evt, question.id);});
+
+    $questionBoxTemplate.attr("data-question-id", question.id);
 
     for (var i = 1; i < questionAndAnswers.length; i++) {
       currentAnswer = questionAndAnswers[i];
@@ -128,7 +143,6 @@ var Admin = (function Admin() {
         if(err) {
           console.error('error deleting question', err);
         } else {
-          // buildProfilePage();
           $(evt.target).closest('#admin-question-box').remove();
         }
       });
@@ -144,10 +158,14 @@ var Admin = (function Admin() {
     var option;
     var letter = 'a';
     $addOption.click(function(){
-      option = $optionTemplate.clone();
-      letter = nextChar(letter);
-      option.find('#answer-label').text(letter + ')');
-      $answerFormDiv.append(option);
+
+      //only allow options up to 'z'
+      if(letter.charCodeAt(0) < 122) {
+        option = $optionTemplate.clone();
+        letter = nextChar(letter);
+        option.find('#answer-label').text(letter + ')');
+        $answerFormDiv.append(option);
+      }
     });
 
     $submitQuestion.click(submitQuestion);
