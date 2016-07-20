@@ -19,6 +19,7 @@ var Admin = (function Admin() {
   var currentAnswer;
   var answerLetter;
   var answerClone;
+  var errorMessage;
 
   return publicAPI;
 
@@ -26,6 +27,7 @@ var Admin = (function Admin() {
 
     $username = $('#sign-in-username').val();
     $password = $('#sign-in-password').val();
+    $errorMessage = $('#warning-message');
 
     data = {
       username: $username,
@@ -36,11 +38,18 @@ var Admin = (function Admin() {
       if (err) {
         console.error('error logging in', err);
       } else {
-        userID = status.user;
-        buildProfilePage();
+
+        //will only have a 'user' property if successful login
+        if(status.user){
+          userID = status.user;
+          buildProfilePage();
+          $errorMessage.text('');
+        } else {
+          errorMessage = status.error ? 'Username not found!' : 'Password incorrect!';
+          $errorMessage.text(errorMessage).show();
+        }
       }
     });
-
   }
 
   function signUp() {
@@ -67,6 +76,7 @@ var Admin = (function Admin() {
           //user signup successful
           userID = status.user;
           buildProfilePage();
+          $errorMessage.hide();
         }
       }
     });
@@ -148,6 +158,7 @@ var Admin = (function Admin() {
         .find('#admin-answer-list')
           .append(answerClone);
     }
+
     return $questionBoxTemplate.show();
   }
 

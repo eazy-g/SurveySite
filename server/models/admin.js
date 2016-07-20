@@ -23,14 +23,15 @@ Admin.login = function (credentials) {
   return Admin.findUser(credentials.username)
     .then(function (user) {
       if (user) {
-        return decoder(credentials.password, user.password).bind(this)
-          .then(function (match) {
-            if (match) {
-              return {user: user.id};
-            } else {
-              return {success: false};
-            }
-        });
+        return decoder(credentials.password, user.password)
+                 .bind(this)
+                 .then(function (match) {
+                   if (match) {
+                     return {user: user.id};
+                   } else {
+                     return {success: false};
+                   }
+                 });
       } else {
         return {error: 'not found'};
       }
@@ -44,7 +45,8 @@ Admin.signup = function (credentials) {
       if (user) {
         return {userTaken: 'User already exists'};
       } else {
-        return cipher(credentials.password, null, null).bind(this)
+        return cipher(credentials.password, null, null)
+                 .bind(this)
                  .then(function (hash) {
                    return db.Admins.create({
                      username: credentials.username,
@@ -56,6 +58,7 @@ Admin.signup = function (credentials) {
                  });
                });
       }
+
     }).catch(function(err){
       console.error('err on creation', err);
     });

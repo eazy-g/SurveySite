@@ -65,8 +65,8 @@ var QuestionPage = (function QuestionPage() {
         buildQuestion();
       }
     });
-
   } //end function getQuestion
+
 
   function buildQuestion () {
     $submitButton.prop('disabled', true);
@@ -79,7 +79,12 @@ var QuestionPage = (function QuestionPage() {
       $questionBody.text(questionText[0]);
 
       for (var i = 1; i < questionText.length; i++) {
-        $answerList.append($answerTemplate.clone().text(questionText[i]));
+        $answerList
+          .append(
+            $answerTemplate
+            .clone()
+            .text(questionText[i])
+          );
       }
 
     } else {
