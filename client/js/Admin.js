@@ -1,5 +1,9 @@
 var Admin = (function Admin() {
-  var publicAPI;
+  var publicAPI = {
+    signIn: signIn,
+    signUp: signUp
+  };
+
   var data;
   var userID;
   var $username;
@@ -15,11 +19,6 @@ var Admin = (function Admin() {
   var currentAnswer;
   var answerLetter;
   var answerClone;
-
-  publicAPI = {
-    signIn: signIn,
-    signUp: signUp
-  };
 
   return publicAPI;
 
@@ -99,9 +98,10 @@ var Admin = (function Admin() {
     $answer = $('#admin-answer');
     $answerTemplate = $answer.clone();
 
-    $questionBoxTemplate.find('#admin-answer-list').empty();
-
+    //I used the ^ as identifier so that the question text as well as answers could be put into one string
     questionAndAnswers = question.question_text.split('^');
+
+    $questionBoxTemplate.find('#admin-answer-list').empty();
 
     $questionBoxTemplate.find('#admin-question-body').text(questionAndAnswers[0]);
 
@@ -147,10 +147,10 @@ var Admin = (function Admin() {
     var $answerFormDiv = $('#created-answers');
     var $submitQuestion = $('#submit-question');
     var $optionTemplate = $answersForm.clone();
-    var option;
     var letter = 'a';
-    $addOption.click(function(){
+    var option;
 
+    $addOption.click(function(){
       //only allow options up to 'z'
       if(letter.charCodeAt(0) < 122) {
         option = $optionTemplate.clone();
@@ -170,19 +170,21 @@ var Admin = (function Admin() {
   function submitQuestion () {
     var letter = 'a';
     var $createQmodal = $('#myModal-create');
-    var $questionText = $('#question-text').val();
+    var questionText = [$('#question-text').val()];
+
     $('*[id*=answer-option]:visible').each(function() {
-      $questionText += ' ^' + letter + ') ' + $( this ).val();
+      questionText.push(' ^' + letter + ') ' + $( this ).val());
       letter = nextChar(letter);
     });
+
     ServerAPI.createQuestion({
-      question_text: $questionText,
+      question_text: questionText.join(''),
       adminId: userID
       }, function answerSubmitted (err, success) {
         if (err) {
           console.error('error submitting question', err);
         } else {
-          //Making the new question have all the properties necessary to buildQuestion
+          //Making the new question have all the properties necessary to 'buildQuestion'
           success.answers = [];
           success.percentages = {};
           success.totalAnswers = 0;
@@ -190,7 +192,7 @@ var Admin = (function Admin() {
           $('body').append(buildQuestion(success));
           $createQmodal.modal('hide');
 
-          //had to setTimeout because modal was being removed before the modal's 'hide' animation was finished. Removing the modal with all of the user's input and then adding back in a clone of the original seemed easier than backtracking through all the changes to the modal.
+          //had to setTimeout because the modal was being removed from the page before the modal's 'hide' animation was finished. Also, removing the modal with all of the user's input, and then adding back in a clone of the original seemed easier than backtracking through all the changes to the modal.
           setTimeout(function(){
             $createQmodal.remove();
             $('body').append($originalCreateQmodal.clone());

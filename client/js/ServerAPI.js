@@ -1,7 +1,5 @@
 var ServerAPI = (function ServerAPI(){
-  var publicAPI;
-
-  publicAPI = {
+  var publicAPI = {
     login: login,
     getQuestion: getQuestion,
     submitAnswer: submitAnswer,

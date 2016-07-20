@@ -3,7 +3,14 @@
 var user;
 
 var App = (function App(){
-  var publicAPI;
+  var publicAPI = {
+    init: init,
+    clearHomePage: clearHomePage,
+    showHomePage: showHomePage,
+    homePage: null,
+    identity: null
+  };
+
   var identity;
   var $questionBox;
   var $getQuestionsButton;
@@ -13,15 +20,6 @@ var App = (function App(){
   var $spinner;
   var $signinModal;
   var $signupModal;
-
-  publicAPI = {
-    init: init,
-    clearHomePage: clearHomePage,
-    showHomePage: showHomePage,
-    homePage: null,
-
-    identity: null
-  };
 
   return publicAPI;
 

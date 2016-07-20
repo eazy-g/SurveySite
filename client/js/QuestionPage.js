@@ -1,5 +1,8 @@
 var QuestionPage = (function QuestionPage() {
-  var publicAPI;
+  var publicAPI = {
+    getQuestion: getQuestion
+  };
+
   var $questionBox;
   var $questionBody;
   var $answer;
@@ -12,10 +15,6 @@ var QuestionPage = (function QuestionPage() {
   var currentQuestion;
   var questionText;
 
-  publicAPI = {
-    getQuestion: getQuestion
-  };
-
   return publicAPI;
 
   function getQuestion () {
@@ -26,10 +25,10 @@ var QuestionPage = (function QuestionPage() {
     $answerList = $('#answer-list');
     $selectedAnswer = $('#selected-answer');
     $submitButton = $('#submit-answer');
-
-    $homeButtonBox.show();
     $questionAnswers = $("#question-box").show();
     $answerTemplate = $answer.clone();
+
+    $homeButtonBox.show();
     $answer.remove();
 
     $homeButton.click(App.showHomePage);
@@ -56,29 +55,10 @@ var QuestionPage = (function QuestionPage() {
         }
 
         buildQuestion();
-
-      } //end else success block
-    }); //ServerAPI.getQuesiton
-  } //function getQuestion
-
-
-  function answerQuestion(answer) {
-    var data = {
-      identity: user,
-      questionId: currentQuestion.id,
-      user_answer: answer.toLowerCase()
-    };
-
-    ServerAPI.submitAnswer(data, function answerSubmitted(err, success) {
-      if(err) {
-        console.error('error answering question', err);
-      } else {
-        buildQuestion();
       }
     });
 
-  }
-
+  } //end function getQuestion
 
   function buildQuestion () {
     $submitButton.prop('disabled', true);
@@ -97,7 +77,22 @@ var QuestionPage = (function QuestionPage() {
       //there are no questions left
       $questionBody.text('You\'ve answered every question in the system! Please come back later');
     }
+  }
 
+  function answerQuestion(answer) {
+    var data = {
+      identity: user,
+      questionId: currentQuestion.id,
+      user_answer: answer.toLowerCase()
+    };
+
+    ServerAPI.submitAnswer(data, function answerSubmitted(err, success) {
+      if(err) {
+        console.error('error answering question', err);
+      } else {
+        buildQuestion();
+      }
+    });
   }
 
 })();

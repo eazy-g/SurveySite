@@ -11,6 +11,7 @@ router.get('/questions', function (req, res) {
     .then(function(questions){
 
       for (var i = 0; i < questions.length; i++) {
+
         //remove the sequelize junk and turn into plain object so we can add properties
         questions[i] = questions[i].get({plain: true});
 

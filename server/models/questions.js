@@ -15,6 +15,8 @@ Questions.getUnanswered = function (ip) {
                    }
                  }]
                }).then(function (questions){
+                 //had to initialize array with '0' b/c the $notIn functionality below
+                 //failed when searching an empty array
                  var alreadyAnswered = [0];
                  questions.forEach(function(question){
                    alreadyAnswered.push(question.id);
@@ -22,15 +24,22 @@ Questions.getUnanswered = function (ip) {
                  return db.Questions.findAll({
                    where: {
                      id: { $notIn: alreadyAnswered }
-                   }
+                   },
+                   order: [
+                     db.sequelize.fn('RAND')
+                   ]
                  });
                });
       } else {
+        //create guest and then get first question
         return db.Guests.create({identity: ip})
           .then(function (newGuest){
-            return db.Questions.findOne();
-          })
-        //create guest and then get first question
+            return db.Questions.findOne({
+              order: [
+                db.sequelize.fn('RAND')
+              ]
+            });
+          });
       }
     });
 }

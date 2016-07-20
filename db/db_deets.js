@@ -47,36 +47,6 @@ Database.Admins.hasMany(Database.Questions);
 //   // return Database.Admins.findAll({ include: [Database.Questions] });
 // }).then(function(results){
 //   console.log('results', JSON.stringify(results));
-// })
-
-// sequelize.sync().then(function () {
-//   // Table created
-//   return Guests.create({
-//     indentity: 'will Hamm'
-//   });
-
 // }).catch(function(err){
 //   console.error('error connecting to db', err);
 // });
-
-// sequelize.sync().then(function () {
-
-//   return Guests.create({'indentity': 'John Smith'}).then(function() {
-//     console.log('yes?');
-//     // Retrieve objects from the database:
-//     // Guests.findAll({ where: {username: "Jean Valjean"} }).then(function(usrs) {
-//     //   // This function is called back with an array of matches.
-//     //   for (var i = 0; i < usrs.length; i++) {
-//     //     console.log(usrs[i].username + " exists");
-//     //   }
-//     // }).catch(function(err) {
-//     //   console.error('place2', err)
-//     // });
-
-//   }).catch(function (err) {
-//     console.error('place1', err);
-//   });
-
-// }).catch(function(err) {
-//   console.error('ugh', err);
-// })
