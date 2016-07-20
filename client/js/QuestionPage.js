@@ -17,8 +17,8 @@ var QuestionPage = (function QuestionPage() {
 
   return publicAPI;
 
-  function getQuestion () {
-    $homeButtonBox = $('#just-home-button');
+  function getQuestion() {
+    $homeButtonBox = $('#home-button-box');
     $homeButton = $('#just-the-home-button');
     $questionBody = $('#question-body');
     $answer = $('#answer');
@@ -33,23 +33,31 @@ var QuestionPage = (function QuestionPage() {
 
     $homeButton.click(App.showHomePage);
 
-    $answerList.click(function(element) {
-      $selectedAnswer.text('Your Answer: ' + element.toElement.textContent.charAt(0).toUpperCase());
+    $answerList.click(function (element) {
+      $selectedAnswer
+        .text('Your Answer: ' +
+          element.toElement.textContent
+            .charAt(0)
+            .toUpperCase()
+        );
+
       $submitButton.prop('disabled', false);
     });
 
-    $submitButton.click(function(element) {
+    $submitButton.click(function (element) {
       answerQuestion($selectedAnswer.text().slice(-1));
     });
 
     ServerAPI.getQuestion(user, function questionRetrieved(err, unanswered) {
-      if(err) {
+      if (err) {
         console.error('error retrieving question', err);
       } else {
-        if(unanswered.hasOwnProperty('question_text')){
+        if (unanswered.hasOwnProperty('question_text')) {
+
           //case where 'unanswered' is just a single question object
           questions = [unanswered];
         } else {
+
           //case where we get multiple questions in an array
           questions = unanswered;
         }
@@ -65,7 +73,7 @@ var QuestionPage = (function QuestionPage() {
     $selectedAnswer.text('Your Answer: ');
     $answerList.empty();
 
-    if(questions.length) {
+    if (questions.length) {
       currentQuestion = questions.shift();
       questionText = currentQuestion.question_text.split('^');
       $questionBody.text(questionText[0]);
@@ -73,7 +81,9 @@ var QuestionPage = (function QuestionPage() {
       for (var i = 1; i < questionText.length; i++) {
         $answerList.append($answerTemplate.clone().text(questionText[i]));
       }
+
     } else {
+
       //there are no questions left
       $questionBody.text('You\'ve answered every question in the system! Please come back later');
     }
@@ -87,7 +97,7 @@ var QuestionPage = (function QuestionPage() {
     };
 
     ServerAPI.submitAnswer(data, function answerSubmitted(err, success) {
-      if(err) {
+      if (err) {
         console.error('error answering question', err);
       } else {
         buildQuestion();

@@ -2,10 +2,12 @@ var db = require('../../db/db_deets');
 var Questions = module.exports;
 
 Questions.getUnanswered = function (ip) {
+
   //first do a comparison to see if new guest or returning
   return db.Guests.findOne({where: {identity: ip}})
-    .then(function (guest){
-      if(guest){
+    .then(function (guest) {
+      if (guest) {
+
         //find questions they have not answered
         return db.Questions.findAll({
                  include: [{
@@ -14,11 +16,14 @@ Questions.getUnanswered = function (ip) {
                      guestID: guest.dataValues.id
                    }
                  }]
-               }).then(function (questions){
-                 //had to initialize array with '0' b/c the $notIn functionality below
-                 //failed when searching an empty array
+               }).then(function (questions) {
+
+                 /**
+                 * had to initialize array with '0' b/c the $notIn functionality below
+                 * failed when searching an empty array
+                 */
                  var alreadyAnswered = [0];
-                 questions.forEach(function(question){
+                 questions.forEach(function (question) {
                    alreadyAnswered.push(question.id);
                  });
                  return db.Questions.findAll({
@@ -31,9 +36,10 @@ Questions.getUnanswered = function (ip) {
                  });
                });
       } else {
+
         //create guest and then get first question
         return db.Guests.create({identity: ip})
-          .then(function (newGuest){
+          .then(function (newGuest) {
             return db.Questions.findOne({
               order: [
                 db.sequelize.fn('RAND')
@@ -45,6 +51,7 @@ Questions.getUnanswered = function (ip) {
 }
 
 Questions.answer = function (details) {
+
   //post to answers table w/ guest_id, question_id, and answer
   return db.Guests.findOne({where: {identity: details.identity}})
     .then(function (guest) {
@@ -55,6 +62,5 @@ Questions.answer = function (details) {
       });
     }).catch(function (err) {
         console.error('error answering question', err);
-    })
-
+    });
 }

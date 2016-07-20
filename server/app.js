@@ -1,5 +1,4 @@
 var express = require('express');
-// var browserify = require('browserify-middleware');
 var Path = require('path');
 var questionsRouter = require('./controllers/questions');
 var adminRouter = require('./controllers/admin');
@@ -22,8 +21,7 @@ routes.get('/', function (req, res) {
 
 if (process.env.NODE_ENV !== 'test') {
 
-  // We're in development or production mode;
-  // create and run a real server.
+  // We're in development or production mode; create and run a real server.
   var app = express();
   var port = process.env.PORT || 4400;
 
@@ -32,6 +30,7 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(parser.urlencoded({
     extended: true
   }));
+
   // Logging and parsing
   app.use(morgan('dev'));
 
@@ -40,6 +39,7 @@ if (process.env.NODE_ENV !== 'test') {
   console.log("Listening on port", port);
 
 } else {
+
   // We're in test mode; make this file importable instead.
   module.exports = routes;
 }

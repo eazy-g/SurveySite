@@ -1,8 +1,7 @@
-//This will hold the user's ip. In the case they decide to answer questions,
-//it will be used to identify them
+//This will hold the user's ip. When they decide to answer questions, it will be used to identify them
 var user;
 
-var App = (function App(){
+var App = (function App() {
   var publicAPI = {
     init: init,
     clearHomePage: clearHomePage,
@@ -30,26 +29,26 @@ var App = (function App(){
     $signInButton = $('#sign-in');
     $signUpButton = $('#sign-up');
     $createButton = $('#create-button');
-    $homeButton = $('#just-home-button');
+    $homeButton = $('#home-button-box');
     $questionBox = $('#question-box');
     $signinModal = $('#myModal-signin');
     $signupModal = $('#myModal-signup');
 
-    $getQuestionsButton.click(function(e) {
+    $getQuestionsButton.click(function (e) {
       clearHomePage();
       QuestionPage.getQuestion();
     });
 
-    $signInButton.click(function(e) {
+    $signInButton.click(function (e) {
       Admin.signIn();
     });
 
-    $signUpButton.click(function(e) {
+    $signUpButton.click(function (e) {
       Admin.signUp();
     });
   }
 
-  function clearHomePage () {
+  function clearHomePage() {
     publicAPI.homePage.hide();
     $signinModal.modal('hide');
     $signupModal.modal('hide');
@@ -60,8 +59,10 @@ var App = (function App(){
     $createButton.hide();
     $questionBox.hide();
     $homeButton.hide();
-    $('*').filter(function() {
-      if($(this).data('question-id') !== undefined){
+
+    //remove all of the users questions from the page
+    $('*').filter(function () {
+      if ($(this).data('question-id')) {
         $(this).remove();
       }
     });

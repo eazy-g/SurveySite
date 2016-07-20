@@ -7,14 +7,14 @@ module.exports = router;
 
 router.get('*', function (req, res) {
   Questions.getUnanswered(req.query.guest)
-    .then(function(questions){
+    .then(function (questions) {
       res.status(200).send(questions);
     });
 });
 
 router.post('/answer', function (req, res) {
   Questions.answer(req.body)
-    .then(function(status){
+    .then(function (status) {
       res.status(201).send(status);
     });
 });

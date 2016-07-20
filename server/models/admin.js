@@ -13,7 +13,7 @@ Admin.getAllQuestions = function (member_name) {
              model: db.Questions,
              include: [db.Answers]
            }]
-         }).then(function getStats (user) {
+         }).then(function getStats(user) {
            return user.questions;
          });
 }
@@ -22,17 +22,17 @@ Admin.getAllQuestions = function (member_name) {
 Admin.login = function (credentials) {
   return Admin.findUser(credentials.username)
     .then(function (user) {
-      if(user){
+      if (user) {
         return decoder(credentials.password, user.password).bind(this)
-          .then(function(match){
-            if(match){
+          .then(function (match) {
+            if (match) {
               return {user: user.id};
             } else {
               return {success: false};
             }
         });
       } else {
-        return {error: 'not found'}
+        return {error: 'not found'};
       }
     });
 }
@@ -41,15 +41,16 @@ Admin.login = function (credentials) {
 Admin.signup = function (credentials) {
   return Admin.findUser(credentials.username)
     .then(function (user) {
-      if(user){
-        return {userTaken: 'User already exists'}
+      if (user) {
+        return {userTaken: 'User already exists'};
       } else {
         return cipher(credentials.password, null, null).bind(this)
                  .then(function (hash) {
                    return db.Admins.create({
                      username: credentials.username,
                      password: hash
-                 }).then(function newUser (newnew) {
+                 }).then(function newUser(newnew) {
+
                    //so that the hashed password and other sensitive information is not sent back to client
                    return {user: newnew.username};
                  });

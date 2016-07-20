@@ -1,4 +1,4 @@
-var ServerAPI = (function ServerAPI(){
+var ServerAPI = (function ServerAPI() {
   var publicAPI = {
     login: login,
     getQuestion: getQuestion,
@@ -15,15 +15,15 @@ var ServerAPI = (function ServerAPI(){
   // ********************************
 
   function callAPI(endpoint,method,data,dataType,callback) {
-    $.ajax("/" + endpoint,{
+    $.ajax("/" + endpoint, {
       method: method,
       data: data,
       dataType: dataType,
       cache: false,
-      success: function onSuccess(resp){
+      success: function onSuccess(resp) {
         callback(null,resp);
       },
-      error: function onError(jq,statusText,errText){
+      error: function onError(jq,statusText,errText) {
         callback(jq.responseText || errText);
       },
     });
