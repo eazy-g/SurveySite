@@ -55,7 +55,8 @@ var QuestionPage = (function QuestionPage() {
         if (unanswered.hasOwnProperty('question_text')) {
 
           //case where 'unanswered' is just a single question object
-          questions = [unanswered];
+          questions = [];
+          questions.push(unanswered);
         } else {
 
           //case where we get multiple questions in an array
