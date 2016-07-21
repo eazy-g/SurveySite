@@ -4,7 +4,7 @@
   "description": "Only the best survey site ever made",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server/app.js"
+    "start": "node server/app.js"
   },
   "author": "Garrett Brustkern",
   "license": "MIT",
