@@ -54,12 +54,12 @@ var QuestionPage = (function QuestionPage() {
       } else {
         console.log('unanswered', unanswered);
         if (unanswered.hasOwnProperty('question_text')) {
-
+          console.log('in first');
           //case where 'unanswered' is just a single question object
           questions = [];
           questions.push(unanswered);
         } else {
-
+          console.log('in second');
           //case where we get multiple questions in an array
           questions = unanswered;
         }

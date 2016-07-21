@@ -38,7 +38,7 @@ var ServerAPI = (function ServerAPI() {
   }
 
   function getQuestion(identity,cb) {
-    return callAPI("questions?guest=" + identity, "GET", {}, "text", cb);
+    return callAPI("questions?guest=" + identity, "GET", {}, "json", cb);
   }
 
   function submitAnswer(data,cb) {
