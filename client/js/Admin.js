@@ -15,6 +15,7 @@ var Admin = (function Admin() {
   var $answerTemplate;
   var $createButton;
   var $originalCreateQmodal;
+  var $createQmodal;
   var questionAndAnswers;
   var currentAnswer;
   var answerLetter;
@@ -185,6 +186,12 @@ var Admin = (function Admin() {
     var letter = 'a';
     var option;
 
+    $createQmodal = $('#myModal-create');
+    $createQmodal.on('hidden.bs.modal', function (e) {
+      $createQmodal.remove();
+      $('body').append($originalCreateQmodal.clone());
+    });
+
     $addOption.click(function () {
 
       //only allow options up to 'z'
@@ -205,7 +212,6 @@ var Admin = (function Admin() {
 
   function submitQuestion() {
     var letter = 'a';
-    var $createQmodal = $('#myModal-create');
     var questionText = [$('#question-text').val()];
 
     $('*[id*=answer-option]:visible').each(function () {
