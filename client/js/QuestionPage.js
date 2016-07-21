@@ -52,6 +52,7 @@ var QuestionPage = (function QuestionPage() {
       if (err) {
         console.error('error retrieving question', err);
       } else {
+        console.log('unanswered', unanswered);
         if (unanswered.hasOwnProperty('question_text')) {
 
           //case where 'unanswered' is just a single question object
