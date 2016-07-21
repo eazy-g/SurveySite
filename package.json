@@ -4,7 +4,8 @@
   "description": "Only the best survey site ever made",
   "main": "server.js",
   "scripts": {
-    "start": "node server/app.js"
+    "start": "node server/app.js",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "author": "Garrett Brustkern",
   "license": "MIT",
@@ -12,6 +13,7 @@
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.1",
+    "bower": "^1.7.9",
     "browserify": "^13.0.1",
     "express": "^4.12.4",
     "fs": "0.0.2",
