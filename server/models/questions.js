@@ -43,7 +43,7 @@ Questions.getUnanswered = function (ip) {
               //create guest and then get first question
               return db.Guests.create({identity: ip})
                        .then(function (newGuest) {
-                         return db.Questions.findOne({
+                         return db.Questions.findAll({
                            order: [
                              db.sequelize.fn('RAND')
                            ]

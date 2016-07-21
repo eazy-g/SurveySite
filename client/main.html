@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>SurveySite</title>
+    <title>Survey Site</title>
+
+    <link rel="icon" href="client/images/survey-check.png">
 
     <!-- Bootstrap -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -106,7 +108,6 @@
             <span id="warning-message" class="text-warning pull-left"></span>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" id="sign-in">Submit
-              <img class="spinner" src="client/images/spinner.gif">
             </button>
           </div>
         </div>
@@ -134,7 +135,6 @@
             <span id="username-warning-message" class="text-warning pull-left">Username already exists!</span>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" id="sign-up">Submit
-              <img class="spinner" src="client/images/spinner.gif">
             </button>
           </div>
         </div>
@@ -164,7 +164,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" id="add-choice">Add another choice</button>
+            <button type="button" class="btn btn-default pull-left" id="add-choice">Add another answer option</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" id="submit-question">Submit</button>
           </div>

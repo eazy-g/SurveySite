@@ -52,16 +52,7 @@ var QuestionPage = (function QuestionPage() {
       if (err) {
         console.error('error retrieving question', err);
       } else {
-        if (unanswered.hasOwnProperty('question_text')) {
-
-          //case where 'unanswered' is just a single question object
-          questions = [];
-          questions.push(unanswered);
-        } else {
-
-          //case where we get multiple questions in an array
-          questions = unanswered;
-        }
+        questions = unanswered;
 
         buildQuestion();
       }

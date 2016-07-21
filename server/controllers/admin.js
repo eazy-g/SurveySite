@@ -76,7 +76,6 @@ router.post('/createQuestion', function (req, res) {
 router.post('/deleteQuestion', function (req, res) {
   Admin.deleteQuestion(req.body.id)
     .then(function (status) {
-      console.log('status', status);
       res.sendStatus(201);
     });
 });
