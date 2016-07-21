@@ -1,17 +1,17 @@
 var Sequelize = require("sequelize");
-var sequelize = new Sequelize("sleepy-bayou-85275", "s3nrwpp0w11o2h9h", "t6o50clg223inm4h", {
-  host: 'nj5rh9gto1v5n05t.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-  port: 3306,
-  dialect: 'mysql'
+// var sequelize = new Sequelize("sleepy-bayou-85275", "s3nrwpp0w11o2h9h", "t6o50clg223inm4h", {
+//   host: 'nj5rh9gto1v5n05t.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+//   port: 3306,
+//   dialect: 'mysql'
 
-  // pool: {
-  //   max: 5,
-  //   min: 0,
-  //   idle: 10000
-  // }
-});
+//   // pool: {
+//   //   max: 5,
+//   //   min: 0,
+//   //   idle: 10000
+//   // }
+// });
 
-// var sequelize = new Sequelize('mysql://s3nrwpp0w11o2h9h:t6o50clg223inm4h@nj5rh9gto1v5n05t.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/wlal2vxkd0jkqkcq');
+var sequelize = new Sequelize('mysql://s3nrwpp0w11o2h9h:t6o50clg223inm4h@nj5rh9gto1v5n05t.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/wlal2vxkd0jkqkcq');
 
 var Database = module.exports;
 Database.sequelize = sequelize;
